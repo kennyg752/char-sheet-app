@@ -1,20 +1,144 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<h1>{{title}}</h1>
+<div>
+   <div>
+      <label>Character Name: </label>
+      <input [(ngModel)]="pc.name">
+   </div>
+   <div>
+      <button (click)="pc.addClass()">+</button>
+      <label>Classes: </label>
+      <span *ngFor="let class of pc.classes; let i = index">
+         <select [(ngModel)]="class.name">
+            <option selected value="None">None</option>
+            <option value="Paladin">Paladin</option>
+         </select>
+         <select [(ngModel)]="class.lvl"
+         (ngModelChange)="pc.updateTotalLvl($event.target)">
+            <option selected [ngValue]="0">0</option>
+            <option [ngValue]="1">1</option>
+            <option [ngValue]="2">2</option>
+            <option [ngValue]="3">3</option>
+            <option [ngValue]="4">4</option>
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="6">6</option>
+            <option [ngValue]="7">7</option>
+            <option [ngValue]="8">8</option>
+            <option [ngValue]="9">9</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="11">11</option>
+            <option [ngValue]="12">12</option>
+            <option [ngValue]="13">13</option>
+            <option [ngValue]="14">14</option>
+            <option [ngValue]="15">15</option>
+            <option [ngValue]="16">16</option>
+            <option [ngValue]="17">17</option>
+            <option [ngValue]="18">18</option>
+            <option [ngValue]="19">19</option>
+            <option [ngValue]="20">20</option>
+         </select>
+         <button (click)="pc.removeClass(i, 1)">-</button>
+      </span>
+   </div>
+   <div>Total Level: {{pc.totalLvl}}</div>
+   <div>
+      <label>Race: </label>
+      <select [(ngModel)]="pc.race.name"
+      (ngModelChange)="pc.updateRace()">
+         <option selected value="Undecided">Undecided</option>
+         <option value="Tiefling-Abyssal">Tiefling (Abyssal)</option>
+      </select>
+   </div>
+   <div>
+      <label>Strength: </label>
+      <input
+       [(ngModel)]="pc.score[0]"
+       (ngModelChange)="pc.updateMod(0)">
+      <label>Modifier: </label>
+      <span>
+         {{display(pc.mod[0])}}
+      </span>
+      <label>Saving Throw: </label>
+      <span>{{display(pc.saves[0].bonus)}}</span>
+   </div>
+   <div>
+      <label>Dexterity: </label>
+      <input
+       [(ngModel)]="pc.score[1]"
+       (ngModelChange)="pc.updateMod(1)">
+      <label>Modifier: </label>
+      <span>
+         {{display(pc.mod[1])}}
+      </span>
+      <label>Saving Throw: </label>
+      <span>{{display(pc.saves[1].bonus)}}</span>
+   </div>
+   <div>
+      <label>Constitution: </label>
+      <input
+       [(ngModel)]="pc.score[2]"
+       (ngModelChange)="pc.updateMod(2)">
+      <label>Modifier: </label>
+      <span>
+         {{display(pc.mod[2])}}
+      </span>
+      <label>Saving Throw: </label>
+      <span>{{display(pc.saves[2].bonus)}}</span>
+   </div>
+   <div>
+      <label>Intelligence: </label>
+      <input
+       [(ngModel)]="pc.score[3]"
+       (ngModelChange)="pc.updateMod(3)">
+      <label>Modifier: </label>
+      <span>
+         {{display(pc.mod[3])}}
+      </span>
+      <label>Saving Throw: </label>
+      <span>{{display(pc.saves[3].bonus)}}</span>
+   </div>
+   <div>
+      <label>Wisdom: </label>
+      <input
+       [(ngModel)]="pc.score[4]"
+       (ngModelChange)="pc.updateMod(4)">
+      <label>Modifier: </label>
+      <span>
+         {{display(pc.mod[4])}}
+      </span>
+      <label>Saving Throw: </label>
+      <span>{{display(pc.saves[4].bonus)}}</span>
+   </div>
+   <div>
+      <label>Charisma: </label>
+      <input
+       [(ngModel)]="pc.score[5]"
+       (ngModelChange)="pc.updateMod(5)">
+      <label>Modifier: </label>
+      <span>
+         {{display(pc.mod[5])}}
+      </span>
+      <label>Saving Throw: </label>
+      <span>{{display(pc.saves[5].bonus)}}</span>
+   </div>
+   <div>
+      <label>Armor Class: </label>
+      <span>{{pc.ac}}</span>
+   </div>
+   <div>
+      <label>Initiative: </label>
+      <span>{{display(pc.mod[1])}}</span>
+   </div>
+   <div>
+      <label>Proficiency Bonus: </label>
+      <span>+{{pc.profBonus}}</span>
+   </div>
+   <div>
+      <label>Speed: </label>
+      <span>{{pc.race.speed}} ft.</span>
+   </div>
+   <div>
+      <label>Size: </label>
+      <span>{{pc.race.size}}</span>
+   </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
-
