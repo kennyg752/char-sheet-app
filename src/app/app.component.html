@@ -5,7 +5,7 @@
       <label>Character Name: </label>
       <input [(ngModel)]="pc.name">
    </div>
-   <div>
+   <div><!--Classes-->
       <button (click)="pc.addClass()">+</button>
       <label>Classes: </label>
       <span *ngFor="let class of pc.classes; let i = index">
@@ -49,96 +49,174 @@
          <option value="Tiefling-Abyssal">Tiefling (Abyssal)</option>
       </select>
    </div>
-   <div>
-      <label>Strength: </label>
-      <input
-       [(ngModel)]="pc.score[0]"
-       (ngModelChange)="pc.updateMod(0)">
-      <label>Modifier: </label>
-      <span>
-         {{display(pc.mod[0])}}
-      </span>
-      <label>Saving Throw: </label>
-      <span>{{display(pc.saves[0].bonus)}}</span>
+   <div><!--Ability Scores, Modifiers and Saving Throws-->
+      <div>
+         <label>Strength: </label>
+         <input
+          [(ngModel)]="pc.str.score"
+          (ngModelChange)="pc.str.update(this.profBonus)">
+         <label>Modifier: </label>
+         <span>
+            {{display(pc.str.mod)}}
+         </span>
+         <label>Saving Throw: </label>
+         <span>{{display(pc.str.save)}}</span>
+      </div>
+      <div>
+         <label>Dexterity: </label>
+         <input
+          [(ngModel)]="pc.dex.score"
+          (ngModelChange)="pc.dex.update(this.profBonus)">
+         <label>Modifier: </label>
+         <span>
+            {{display(pc.dex.mod)}}
+         </span>
+         <label>Saving Throw: </label>
+         <span>{{display(pc.dex.save)}}</span>
+      </div>
+      <div>
+         <label>Constitution: </label>
+         <input
+          [(ngModel)]="pc.con.score"
+          (ngModelChange)="pc.con.update(this.profBonus)">
+         <label>Modifier: </label>
+         <span>
+            {{display(pc.con.mod)}}
+         </span>
+         <label>Saving Throw: </label>
+         <span>{{display(pc.con.save)}}</span>
+      </div>
+      <div>
+         <label>Intelligence: </label>
+         <input
+          [(ngModel)]="pc.int.score"
+          (ngModelChange)="pc.int.update(this.profBonus)">
+         <label>Modifier: </label>
+         <span>
+            {{display(pc.int.mod)}}
+         </span>
+         <label>Saving Throw: </label>
+         <span>{{display(pc.int.save)}}</span>
+      </div>
+      <div>
+         <label>Wisdom: </label>
+         <input
+          [(ngModel)]="pc.wis.score"
+          (ngModelChange)="pc.wis.update(this.profBonus)">
+         <label>Modifier: </label>
+         <span>
+            {{display(pc.wis.mod)}}
+         </span>
+         <label>Saving Throw: </label>
+         <span>{{display(pc.wis.save)}}</span>
+      </div>
+      <div>
+         <label>Charisma: </label>
+         <input
+          [(ngModel)]="pc.cha.score"
+          (ngModelChange)="pc.cha.update(this.profBonus)">
+         <label>Modifier: </label>
+         <span>
+            {{display(pc.cha.mod)}}
+         </span>
+         <label>Saving Throw: </label>
+         <span>{{display(pc.cha.save)}}</span>
+      </div>
    </div>
-   <div>
-      <label>Dexterity: </label>
-      <input
-       [(ngModel)]="pc.score[1]"
-       (ngModelChange)="pc.updateMod(1)">
-      <label>Modifier: </label>
-      <span>
-         {{display(pc.mod[1])}}
-      </span>
-      <label>Saving Throw: </label>
-      <span>{{display(pc.saves[1].bonus)}}</span>
+   <div><!--Derived/Misc. Stats-->
+      <div>
+         <label>Armor Class: </label>
+         <span>{{pc.ac}}</span>
+      </div>
+      <div>
+         <label>Initiative: </label>
+         <span>{{display(pc.dex.mod)}}</span>
+      </div>
+      <div>
+         <label>Proficiency Bonus: </label>
+         <span>+{{pc.profBonus}}</span>
+      </div>
+      <div>
+         <label>Speed: </label>
+         <span>{{pc.race.speed}} ft.</span>
+      </div>
+      <div>
+         <label>Size: </label>
+         <span>{{pc.race.size}}</span>
+      </div>
    </div>
-   <div>
-      <label>Constitution: </label>
-      <input
-       [(ngModel)]="pc.score[2]"
-       (ngModelChange)="pc.updateMod(2)">
-      <label>Modifier: </label>
-      <span>
-         {{display(pc.mod[2])}}
-      </span>
-      <label>Saving Throw: </label>
-      <span>{{display(pc.saves[2].bonus)}}</span>
-   </div>
-   <div>
-      <label>Intelligence: </label>
-      <input
-       [(ngModel)]="pc.score[3]"
-       (ngModelChange)="pc.updateMod(3)">
-      <label>Modifier: </label>
-      <span>
-         {{display(pc.mod[3])}}
-      </span>
-      <label>Saving Throw: </label>
-      <span>{{display(pc.saves[3].bonus)}}</span>
-   </div>
-   <div>
-      <label>Wisdom: </label>
-      <input
-       [(ngModel)]="pc.score[4]"
-       (ngModelChange)="pc.updateMod(4)">
-      <label>Modifier: </label>
-      <span>
-         {{display(pc.mod[4])}}
-      </span>
-      <label>Saving Throw: </label>
-      <span>{{display(pc.saves[4].bonus)}}</span>
-   </div>
-   <div>
-      <label>Charisma: </label>
-      <input
-       [(ngModel)]="pc.score[5]"
-       (ngModelChange)="pc.updateMod(5)">
-      <label>Modifier: </label>
-      <span>
-         {{display(pc.mod[5])}}
-      </span>
-      <label>Saving Throw: </label>
-      <span>{{display(pc.saves[5].bonus)}}</span>
-   </div>
-   <div>
-      <label>Armor Class: </label>
-      <span>{{pc.ac}}</span>
-   </div>
-   <div>
-      <label>Initiative: </label>
-      <span>{{display(pc.mod[1])}}</span>
-   </div>
-   <div>
-      <label>Proficiency Bonus: </label>
-      <span>+{{pc.profBonus}}</span>
-   </div>
-   <div>
-      <label>Speed: </label>
-      <span>{{pc.race.speed}} ft.</span>
-   </div>
-   <div>
-      <label>Size: </label>
-      <span>{{pc.race.size}}</span>
+   <div><!--Skill Checks-->
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
+      <div>
+         <label></label>
+         <span></span>
+      </div>
    </div>
 </div>
