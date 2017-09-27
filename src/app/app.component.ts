@@ -13,10 +13,12 @@ export class Race {
    name: string;
    size: string;
    speed: number;
+   bonuses: number[];
    constructor() {
       this.name = 'Undecided';
       this.speed = 0;
       this.size = 'Small';
+      this.bonuses = [0, 0, 0, 0, 0, 0];
    }
 }
 
@@ -213,12 +215,26 @@ export class PC {
          case "Tiefling-Abyssal": {
             this.race.speed = 30;
             this.race.size = 'Medium';
+            this.race.bonuses[5] = 2; //Charisma +2
+            this.race.bonuses[2] = 1; //Constitution +1
             break;
          }
          default: {
             break;
          }
       }
+      this.str.score += this.race.bonuses[0];
+      this.str.update(this.profBonus);
+      this.dex.score += this.race.bonuses[1];
+      this.dex.update(this.profBonus);
+      this.con.score += this.race.bonuses[2];
+      this.con.update(this.profBonus);
+      this.int.score += this.race.bonuses[3];
+      this.int.update(this.profBonus);
+      this.wis.score += this.race.bonuses[4];
+      this.wis.update(this.profBonus);
+      this.cha.score += this.race.bonuses[5];
+      this.cha.update(this.profBonus);
    }
    addClass(): void {
       this.classes.push(new Class());
@@ -241,16 +257,7 @@ export class PC {
 @Component({
    selector: 'app-root',
    templateUrl: './app.component.html',
-   styles: [`
-      input {
-         border-style: none none solid none;
-      }
-      select {
-         -webkit-appearance: none;
-         -moz-appearance: none;
-         border-style: none none solid none;
-      }
-   `]
+   styleUrls: [`./app.component.css`]
 })
 
 
