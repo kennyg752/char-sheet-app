@@ -14,7 +14,7 @@
             <option value="Paladin">Paladin</option>
          </select>
          <select [(ngModel)]="class.lvl"
-         (ngModelChange)="pc.updateTotalLvl($event.target)">
+         (ngModelChange)="pc.getTotalLvl($event.target)">
             <option selected [ngValue]="0">0</option>
             <option [ngValue]="1">1</option>
             <option [ngValue]="2">2</option>
@@ -52,11 +52,11 @@
    <div><!--Derived/Misc. Stats-->
       <div>
          <label>Armor Class: </label>
-         <span>{{pc.ac}}</span>
+         <span>{{pc.getArmorClass(pc.baseAC)}}</span>
       </div>
       <div>
          <label>Initiative: </label>
-         <span>{{display(pc.dex.mod)}}</span>
+         <span>{{display(pc.getMod(dex))}}</span>
       </div>
       <div>
          <label>Proficiency Bonus: </label>
@@ -75,37 +75,31 @@
    <div><!--Ability Scores, Modifiers and Saving Throws-->
       <div><!--Strength-->
          <label>Strength: </label>
-         <input
-          [(ngModel)]="pc.str.score"
-          (ngModelChange)="pc.str.update(pc.profBonus)">
+         <input [(ngModel)]="pc.score[str]">
          <div>
             <label>Modifier: </label>
-            <span>{{display(pc.str.mod)}}</span>
+            <span>{{display(pc.getMod(str))}}</span>
             <label>Saving Throw: </label>
-            <span>{{display(pc.str.save)}}</span>
+            <span>{{display(pc.getSave(str, false))}}</span>
          </div>
-         <div>
+         <!--<div>
             <input type="checkbox" [(ngModel)]="pc.str.athletics.isProficient"
             (ngModelChange)="pc.str.athletics.update(pc.str.mod, pc.profBonus)">
             <label>Athletics: </label>
             <span>{{pc.str.athletics.bonus}}</span>
-         </div>
+         </div>-->
          <br>
       </div>
       <div><!--Dexterity-->
          <label>Dexterity: </label>
-         <input
-          [(ngModel)]="pc.dex.score"
-          (ngModelChange)="pc.dex.update(pc.profBonus)">
+         <input [(ngModel)]="pc.score[dex]">
          <div>
             <label>Modifier: </label>
-            <span>
-               {{display(pc.dex.mod)}}
-            </span>
+            <span>{{display(pc.getMod(dex))}}</span>
             <label>Saving Throw: </label>
-            <span>{{display(pc.dex.save)}}</span>
+            <span>{{display(pc.getSave(dex, false))}}</span>
          </div>
-         <div>
+         <!--<div>
             <input type="checkbox" [(ngModel)]="pc.dex.acrobatics.isProficient"
             (ngModelChange)="pc.dex.acrobatics.update(pc.dex.mod, pc.profBonus)">
             <label>Acrobatics: </label>
@@ -122,38 +116,32 @@
             (ngModelChange)="pc.dex.stealth.update(pc.dex.mod, pc.profBonus)">
             <label>Stealth: </label>
             <span>{{pc.dex.stealth.bonus}}</span>
-         </div>
+         </div>-->
          <br>
       </div>
       <div><!--Constitution-->
          <label>Constitution: </label>
-         <input
-          [(ngModel)]="pc.con.score"
-          (ngModelChange)="pc.con.update(pc.profBonus)">
+         <input [(ngModel)]="pc.score[con]">
          <div>
             <label>Modifier: </label>
             <span>
-               {{display(pc.con.mod)}}
+               {{display(pc.getMod(con))}}
             </span>
             <label>Saving Throw: </label>
-            <span>{{display(pc.con.save)}}</span>
+            <span>{{display(pc.getSave(con, false))}}</span>
          </div>
          <br>
       </div>
       <div><!--Intelligence-->
          <label>Intelligence: </label>
-         <input
-          [(ngModel)]="pc.int.score"
-          (ngModelChange)="pc.int.update(pc.profBonus)">
+         <input [(ngModel)]="pc.score[int]">
          <div>
             <label>Modifier: </label>
-            <span>
-               {{display(pc.int.mod)}}
-            </span>
+            <span>{{display(pc.getMod(int))}}</span>
             <label>Saving Throw: </label>
-            <span>{{display(pc.int.save)}}</span>
+            <span>{{display(pc.getSave(int, false))}}</span>
          </div>
-         <div>
+         <!--<div>
             <input type="checkbox" [(ngModel)]="pc.int.arcana.isProficient"
             (ngModelChange)="pc.int.arcana.update(pc.int.mod, pc.profBonus)">
             <label>Arcana: </label>
@@ -182,23 +170,20 @@
             (ngModelChange)="pc.int.religion.update(pc.int.mod, pc.profBonus)">
             <label>Religion: </label>
             <span>{{pc.int.religion.bonus}}</span>
-         </div>
+         </div>-->
          <br>
       </div>
       <div><!--Wisdom-->
          <label>Wisdom: </label>
          <input
-          [(ngModel)]="pc.wis.score"
-          (ngModelChange)="pc.wis.update(pc.profBonus)">
+          [(ngModel)]="pc.score[wis]">
          <div>
             <label>Modifier: </label>
-            <span>
-               {{display(pc.wis.mod)}}
-            </span>
+            <span>{{display(pc.getMod(wis))}}</span>
             <label>Saving Throw: </label>
-            <span>{{display(pc.wis.save)}}</span>
+            <span>{{display(pc.getSave(wis, false))}}</span>
          </div>
-         <div>
+         <!--<div>
             <input type="checkbox" [(ngModel)]="pc.wis.animalHandling.isProficient"
             (ngModelChange)="pc.wis.animalHandling.update(pc.wis.mod, pc.profBonus)">
             <label>Animal Handling: </label>
@@ -227,23 +212,20 @@
             (ngModelChange)="pc.wis.survival.update(pc.wis.mod, pc.profBonus)">
             <label>Survival: </label>
             <span>{{pc.wis.survival.bonus}}</span>
-         </div>
+         </div>-->
          <br>
       </div>
       <div><!--Charisma-->
          <label>Charisma: </label>
          <input
-          [(ngModel)]="pc.cha.score"
-          (ngModelChange)="pc.cha.update(pc.profBonus)">
+          [(ngModel)]="pc.score[cha]">
          <div>
             <label>Modifier: </label>
-            <span>
-               {{display(pc.cha.mod)}}
-            </span>
+            <span>{{display(pc.getMod(cha))}}</span>
             <label>Saving Throw: </label>
-            <span>{{display(pc.cha.save)}}</span>
+            <span>{{display(pc.getSave(cha, false))}}</span>
          </div>
-         <div>
+         <!--<div>
             <input type="checkbox" [(ngModel)]="pc.cha.deception.isProficient"
             (ngModelChange)="pc.cha.deception.update(pc.cha.mod, pc.profBonus)">
             <label>Deception: </label>
@@ -266,7 +248,7 @@
             (ngModelChange)="pc.cha.persuasion.update(pc.cha.mod, pc.profBonus)">
             <label>Persuasion: </label>
             <span>{{pc.cha.persuasion.bonus}}</span>
-         </div>
+         </div>-->
          <br>
       </div>
    </div>

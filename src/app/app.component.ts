@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
 
+const STR = 0;
+const DEX = 1;
+const CON = 2;
+const INT = 3;
+const WIS = 4;
+const CHA = 5;
+
 export class Class {
    name: string;
    lvl: number;
@@ -34,151 +41,13 @@ export class Skill {
    }
 }
 
-export class Ability {
-   score: number;
-   mod: number;
-   isProficient: boolean;
-   save: number;
-   constructor(score: number, isProficient: boolean, profBonus: number) {
-      this.score = score;
-      this.isProficient = isProficient;
-      this.mod = Math.floor((this.score - 10) / 2);
-      this.save = this.isProficient ? this.mod + profBonus : this.mod;
-   }
-}
-
-export class Strength extends Ability {
-   athletics: Skill;
-
-   constructor(score: number, isProficient: boolean, profBonus: number) {
-      super(score, isProficient, profBonus);
-      this.athletics = new Skill(this.mod, false, profBonus);
-   }
-   update(profBonus: number): void {
-      this.mod = Math.floor((this.score - 10) / 2);
-      this.save = this.isProficient ? this.mod + profBonus : this.mod;
-      this.athletics.update(this.mod, profBonus);
-   }
-}
-
-export class Dexterity extends Ability {
-   acrobatics: Skill;
-   sleightOfHand: Skill;
-   stealth: Skill;
-
-   constructor(score: number, isProficient: boolean, profBonus: number) {
-      super(score, isProficient, profBonus);
-      this.acrobatics = new Skill(this.mod, false, profBonus);
-      this.sleightOfHand = new Skill(this.mod, false, profBonus);
-      this.stealth = new Skill(this.mod, false, profBonus);
-   }
-   update(profBonus: number): void {
-      this.mod = Math.floor((this.score - 10) / 2);
-      this.save = this.isProficient ? this.mod + profBonus : this.mod;
-      this.acrobatics.update(this.mod, profBonus);
-      this.sleightOfHand.update(this.mod, profBonus);
-      this.stealth.update(this.mod, profBonus);
-   }
-}
-
-export class Constitution extends Ability {
-
-   constructor(score: number, isProficient: boolean, profBonus: number) {
-      super(score, isProficient, profBonus);
-   }
-   update(profBonus: number): void {
-      this.mod = Math.floor((this.score - 10) / 2);
-      this.save = this.isProficient ? this.mod + profBonus : this.mod;
-   }
-}
-
-export class Intelligence extends Ability {
-   arcana: Skill;
-   history: Skill;
-   investigation: Skill;
-   nature: Skill;
-   religion: Skill;
-
-   constructor(score: number, isProficient: boolean, profBonus: number) {
-      super(score, isProficient, profBonus);
-      this.arcana = new Skill(this.mod, false, profBonus);
-      this.history = new Skill(this.mod, false, profBonus);
-      this.investigation = new Skill(this.mod, false, profBonus);
-      this.nature = new Skill(this.mod, false, profBonus);
-      this.religion = new Skill(this.mod, false, profBonus);
-   }
-   update(profBonus: number): void {
-      this.mod = Math.floor((this.score - 10) / 2);
-      this.save = this.isProficient ? this.mod + profBonus : this.mod;
-      this.arcana.update(this.mod, profBonus);
-      this.history.update(this.mod, profBonus);
-      this.investigation.update(this.mod, profBonus);
-      this.nature.update(this.mod, profBonus);
-      this.religion.update(this.mod, profBonus);
-   }
-}
-
-export class Wisdom extends Ability {
-   animalHandling: Skill;
-   insight: Skill;
-   medicine: Skill;
-   perception: Skill;
-   survival: Skill;
-
-   constructor(score: number, isProficient: boolean, profBonus: number) {
-      super(score, isProficient, profBonus);
-      this.animalHandling = new Skill(this.mod, false, profBonus);
-      this.insight = new Skill(this.mod, false, profBonus);
-      this.medicine = new Skill(this.mod, false, profBonus);
-      this.perception = new Skill(this.mod, false, profBonus);
-      this.survival = new Skill(this.mod, false, profBonus);
-   }
-   update(profBonus: number): void {
-      this.mod = Math.floor((this.score - 10) / 2);
-      this.save = this.isProficient ? this.mod + profBonus : this.mod;
-      this.animalHandling.update(this.mod, profBonus);
-      this.insight.update(this.mod, profBonus);
-      this.medicine.update(this.mod, profBonus);
-      this.perception.update(this.mod, profBonus);
-      this.survival.update(this.mod, profBonus);
-   }
-}
-
-export class Charisma extends Ability {
-   deception: Skill;
-   intimidation: Skill;
-   performance: Skill;
-   persuasion: Skill;
-
-   constructor(score: number, isProficient: boolean, profBonus: number) {
-      super(score, isProficient, profBonus);
-      this.deception = new Skill(this.mod, false, profBonus);
-      this.intimidation = new Skill(this.mod, false, profBonus);
-      this.performance = new Skill(this.mod, false, profBonus);
-      this.persuasion = new Skill(this.mod, false, profBonus);
-   }
-   update(profBonus: number): void {
-      this.mod = Math.floor((this.score - 10) / 2);
-      this.save = this.isProficient ? this.mod + profBonus : this.mod;
-      this.deception.update(this.mod, profBonus);
-      this.intimidation.update(this.mod, profBonus);
-      this.performance.update(this.mod, profBonus);
-      this.persuasion.update(this.mod, profBonus);
-   }
-}
-
 export class PC {
    name: string;
    totalLvl: number;
    classes: Class[];
    race: Race;
-   str: Strength;
-   dex: Dexterity;
-   con: Constitution;
-   int: Intelligence;
-   wis: Wisdom;
-   cha: Charisma;
-   ac: number;
+   score: number[];
+   raceBonus: number[];
    baseAC: number;
    profBonus: number;
 
@@ -187,25 +56,29 @@ export class PC {
       this.totalLvl = 0;
       this.classes = [new Class()];
       this.race = new Race();
+      this.score = [10, 10, 10, 10, 10, 10];
+      this.raceBonus = [0, 2, 0, 0, 0, 0];
       this.baseAC = 10;
       this.profBonus = 2;
-      this.str = new Strength(10, false, this.profBonus);
-      this.dex = new Dexterity(10, false, this.profBonus);
-      this.con = new Constitution(10, false, this.profBonus);
-      this.int = new Intelligence(10, false, this.profBonus);
-      this.wis = new Wisdom(10, false, this.profBonus);
-      this.cha = new Charisma(10, false, this.profBonus);
-      this.ac = this.baseAC + this.dex.mod;
    }
-
-   updateTotalLvl(): void {
+   getArmorClass(base: number): number {
+      return base + this.getMod(DEX);
+   }
+   getMod(stat: number): number {
+      return Math.floor((this.score[stat] - 10 + this.raceBonus[stat]) / 2);
+   }
+   getSave(stat: number, isProficient: boolean): number {
+      let mod = this.getMod(stat);
+      return isProficient ? mod + this.profBonus : mod;
+   }
+   getTotalLvl(): void {
       this.totalLvl = 0;
       for (var i = 0; i < this.classes.length; i++) {
          this.totalLvl += this.classes[i].lvl;
       }
-      this.updateProfBonus();
+      this.getProfBonus();
    }
-   updateRace(): void {
+   getRace(): void {
       switch (this.race.name) {
          case "Undecided": {
             this.race.speed = 0;
@@ -215,42 +88,23 @@ export class PC {
          case "Tiefling-Abyssal": {
             this.race.speed = 30;
             this.race.size = 'Medium';
-            this.race.bonuses[5] = 2; //Charisma +2
-            this.race.bonuses[2] = 1; //Constitution +1
+            this.raceBonus = this.race.bonuses;
             break;
          }
          default: {
             break;
          }
       }
-      this.str.score += this.race.bonuses[0];
-      this.str.update(this.profBonus);
-      this.dex.score += this.race.bonuses[1];
-      this.dex.update(this.profBonus);
-      this.con.score += this.race.bonuses[2];
-      this.con.update(this.profBonus);
-      this.int.score += this.race.bonuses[3];
-      this.int.update(this.profBonus);
-      this.wis.score += this.race.bonuses[4];
-      this.wis.update(this.profBonus);
-      this.cha.score += this.race.bonuses[5];
-      this.cha.update(this.profBonus);
    }
    addClass(): void {
       this.classes.push(new Class());
    }
    removeClass(index: number): void {
       this.classes.splice(index, 1);
-      this.updateTotalLvl();
+      this.getTotalLvl();
    }
-   private updateProfBonus(): void {
+   private getProfBonus(): void {
       this.profBonus = Math.max(2, 2 + Math.floor((this.totalLvl - 1) / 4));
-      this.str.update(this.profBonus);
-      this.dex.update(this.profBonus);
-      this.con.update(this.profBonus);
-      this.int.update(this.profBonus);
-      this.wis.update(this.profBonus);
-      this.cha.update(this.profBonus);
    }
 }
 
@@ -265,8 +119,13 @@ export class AppComponent {
    title = 'D&D Character Sheet';
 
    pc = new PC();
-
-   display(mod: number): string {
-      return mod >= 0 ? "+" + mod.toString() : mod.toString();
+   str = STR;
+   dex = DEX;
+   con = CON;
+   int = INT;
+   wis = WIS;
+   cha = CHA;
+   display(toShow: number): string {
+      return toShow >= 0 ? "+" + toShow.toString() : toShow.toString();
    }
 }
