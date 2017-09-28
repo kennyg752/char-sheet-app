@@ -90,6 +90,11 @@ export class PC {
          new Ability('Wisdom'),
          new Ability('Charisma')
       ];
+      this.initializeSkills();
+      this.baseAC = 10;
+      this.profBonus = 2;
+   }
+   initializeSkills(): void {
       this.addSkill(STR, 'Athletics', false);
       this.addSkill(DEX, 'Acrobatics', false);
       this.addSkill(DEX, 'Sleight Of Hand', false);
@@ -108,8 +113,6 @@ export class PC {
       this.addSkill(CHA, 'Intimidation', false);
       this.addSkill(CHA, 'Performance', false);
       this.addSkill(CHA, 'Persuasion', false);
-      this.baseAC = 10;
-      this.profBonus = 2;
    }
    addSkill(index: number, name: string, isProf: boolean): void {
       this.stat[index].skill.push(new Skill(name, isProf));
