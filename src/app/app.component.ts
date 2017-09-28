@@ -57,10 +57,14 @@ export class Skill {
 }
 export class Ability {
    name: string;
+   score: number;
    skill: Skill[];
+   saveProf: boolean;
    constructor(name: string) {
       this.name = name;
+      this.score = 10;
       this.skill = [];
+      this.saveProf = false;
    }
 }
 export class PC {
@@ -68,7 +72,6 @@ export class PC {
    totalLvl: number;
    classes: Class[];
    race: Race;
-   score: number[];
    stat: Ability[];
    saveProf: boolean[];
    baseAC: number;
@@ -79,7 +82,6 @@ export class PC {
       this.totalLvl = 0;
       this.classes = [new Class()];
       this.race = new Race("Undecided");
-      this.score = [10, 10, 10, 10, 10, 10];
       this.stat = [
          new Ability('Strength'),
          new Ability('Dexterity'),
@@ -106,14 +108,6 @@ export class PC {
       this.addSkill(CHA, 'Intimidation', false);
       this.addSkill(CHA, 'Performance', false);
       this.addSkill(CHA, 'Persuasion', false);
-      this.saveProf = [
-         false,   //STR
-         false,   //DEX
-         false,   //CON
-         false,   //INT
-         false,   //WIS
-         false    //CHA
-      ];
       this.baseAC = 10;
       this.profBonus = 2;
    }
@@ -123,15 +117,15 @@ export class PC {
    getArmorClass(base: number): number {
       return base + this.getMod(DEX);
    }
-   getMod(stat: number): number {
-      return Math.floor((this.score[stat] - 10 + this.race.bonus[stat]) / 2);
+   getMod(index: number): number {
+      return Math.floor((this.stat[index].score - 10 + this.race.bonus[index]) / 2);
    }
-   getSave(stat: number, isProficient: boolean): number {
-      let mod = this.getMod(stat);
+   getSave(index: number, isProficient: boolean): number {
+      let mod = this.getMod(index);
       return isProficient ? mod + this.profBonus : mod;
    }
-   getSkill(stat: number, isProficient: boolean): number {
-      let mod = this.getMod(stat);
+   getSkill(index: number, isProficient: boolean): number {
+      let mod = this.getMod(index);
       return isProficient ? mod + this.profBonus : mod;
    }
    getTotalLvl(): void {
@@ -164,12 +158,7 @@ export class AppComponent {
    title = 'D&D Character Sheet';
 
    pc = new PC();
-   str = STR;
-   dex = DEX;
-   con = CON;
-   int = INT;
-   wis = WIS;
-   cha = CHA;
+
    display(toShow: number): string {
       return toShow >= 0 ? "+" + toShow.toString() : toShow.toString();
    }

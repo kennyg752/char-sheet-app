@@ -56,7 +56,7 @@
       </div>
       <div>
          <label>Initiative: </label>
-         <span>{{display(pc.getMod(dex))}}</span>
+         <span>{{display(pc.getMod(1))}}</span>
       </div>
       <div>
          <label>Proficiency Bonus: </label>
@@ -75,14 +75,14 @@
    <div><!--Ability Scores, Modifiers and Saving Throws-->
       <div *ngFor="let stat of pc.stat; let i = index">
          <label>{{stat.name}}: </label>
-         <input [(ngModel)]="pc.score[i]">
+         <input [(ngModel)]="stat.score">
          <div>
             <label>Modifier: </label>
             <span>{{display(pc.getMod(i))}}</span>
             <div>
-               <input type="checkbox" [(ngModel)]="pc.saveProf[i]">
+               <input type="checkbox" [(ngModel)]="stat.saveProf">
                Saving Throw:
-               <span>{{display(pc.getSave(i, pc.saveProf[i]))}}</span>
+               <span>{{display(pc.getSave(i, stat.saveProf))}}</span>
             </div>
          </div>
          <div *ngFor="let skill of stat.skill">
