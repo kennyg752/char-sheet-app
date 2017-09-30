@@ -9,41 +9,46 @@ const CHA = 5;
 
 export class Class {
    name: string;
+   id: number;
    lvl: number;
-   constructor() {
-      this.name = 'None';
+   constructor(name: string, id: number) {
+      this.name = name;
+      this.id = id;
       this.lvl = 0;
    }
 }
 
 export class Race {
    name: string;
+   id: number;
    size: string;
    speed: number;
    bonus: number[];
-   constructor(name: string) {
-      this.set(name);
+   constructor(name: string, id: number, size: string, speed: number, bonus: number[]) {
+      this.name = name;
+      this.id = id;
+      this.size = size;
+      this.speed = speed;
+      this.bonus = bonus;
    }
-   set(name: string): void {
-      switch (name) {
-         case "Undecided": {
-            this.name = name;
-            this.speed = 0;
-            this.size = 'Small';
-            this.bonus = [0, 0, 0, 0, 0, 0];
-            break;
-         }
-         case "Tiefling-Abyssal": {
-            this.name = name;
-            this.speed = 30;
-            this.size = 'Medium';
-            this.bonus = [0, 0, 1, 0, 0, 2];
-            break;
-         }
-         default: {
-            break;
-         }
-      }
+}
+
+export class Options {
+   classes: Class[];
+   races: Race[];
+   constructor() {
+      this.classes = [
+         new Class('None', 0),
+         new Class('Paladin', 1)
+      ];
+      this.races = [
+         new Race('Undecided', 0, 'Small', 30, [0, 0, 0, 0, 0, 0]),
+         new Race('Dwarf-Hill', 1, 'Medium', 25, [0, 0, 2, 0, 1, 0]),
+         new Race('Tiefling-Abyssal', 2, 'Medium', 30, [0, 0, 1, 0, 0, 2])
+      ];
+   }
+   getRace(index: number): Race {
+      return this.races[index];
    }
 }
 
@@ -70,6 +75,7 @@ export class Ability {
 export class PC {
    name: string;
    totalLvl: number;
+   options: Options;
    classes: Class[];
    race: Race;
    stat: Ability[];
@@ -80,8 +86,9 @@ export class PC {
    constructor() {
       this.name = 'Unknown';
       this.totalLvl = 0;
-      this.classes = [new Class()];
-      this.race = new Race("Undecided");
+      this.options = new Options();
+      this.classes = [new Class('None', 0)];
+      this.race = this.options.races[0];
       this.stat = [
          new Ability('Strength'),
          new Ability('Dexterity'),
@@ -117,6 +124,9 @@ export class PC {
    addSkill(index: number, name: string, isProf: boolean): void {
       this.stat[index].skill.push(new Skill(name, isProf));
    }
+   setClass(oldId: number, newId: number): void {
+      this.classes[oldId].name = this.options.classes[newId].name;
+   }
    getArmorClass(base: number): number {
       return base + this.getMod(DEX);
    }
@@ -139,7 +149,7 @@ export class PC {
       this.getProfBonus();
    }
    addClass(): void {
-      this.classes.push(new Class());
+      this.classes.push(new Class('None', this.classes.length));
    }
    removeClass(index: number): void {
       this.classes.splice(index, 1);

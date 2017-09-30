@@ -63,7 +63,7 @@ input:checked + .slider:before {
 }
 
 input {
-   border-style: none none solid none;
+   border-style: none none none none;
 }
 select {
    -webkit-appearance: none;

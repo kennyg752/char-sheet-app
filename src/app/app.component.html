@@ -10,12 +10,11 @@
       <label>Classes: </label>
       <span *ngFor="let class of pc.classes; let i = index">
          <select [(ngModel)]="class.name">
-            <option selected value="None">None</option>
-            <option value="Paladin">Paladin</option>
+            <option *ngFor="let option of pc.options.classes" [ngValue]="option.name">{{option.name}}</option>
          </select>
-         <select [(ngModel)]="class.lvl"
+         <select *ngIf="class.name != 'None'" [(ngModel)]="class.lvl"
          (ngModelChange)="pc.getTotalLvl($event.target)">
-            <option selected [ngValue]="0">0</option>
+            <option [ngValue]="0">0</option>
             <option [ngValue]="1">1</option>
             <option [ngValue]="2">2</option>
             <option [ngValue]="3">3</option>
@@ -43,10 +42,8 @@
    <div>Total Level: {{pc.totalLvl}}</div>
    <div>
       <label>Race: </label>
-      <select [(ngModel)]="pc.race.name"
-      (ngModelChange)="pc.race.set(pc.race.name)">
-         <option selected value="Undecided">Undecided</option>
-         <option value="Tiefling-Abyssal">Tiefling (Abyssal)</option>
+      <select [(ngModel)]='pc.race'>
+         <option *ngFor="let race of pc.options.races" [ngValue]="race">{{race.name}}</option>
       </select>
    </div>
    <div><!--Derived/Misc. Stats-->
