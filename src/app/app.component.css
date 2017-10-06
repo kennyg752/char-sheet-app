@@ -3,6 +3,12 @@ h1 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 250%;
 }
+input {
+   size: 20;
+}
+input .hidden {
+   display: none;
+}
 /* The switch - the box around the slider */
 .switch {
   position: relative;

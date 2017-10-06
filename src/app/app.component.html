@@ -5,47 +5,8 @@
       <label>Character Name: </label>
       <input [(ngModel)]="pc.name">
    </div>
-   <div><!--Classes-->
-      <button (click)="pc.addClass()">+</button>
-      <label>Classes: </label>
-      <span *ngFor="let class of pc.classes; let i = index">
-         <select [(ngModel)]="class.name">
-            <option *ngFor="let option of pc.options.classes" [ngValue]="option.name">{{option.name}}</option>
-         </select>
-         <select *ngIf="class.name != 'None'" [(ngModel)]="class.lvl"
-         (ngModelChange)="pc.getTotalLvl($event.target)">
-            <option [ngValue]="0">0</option>
-            <option [ngValue]="1">1</option>
-            <option [ngValue]="2">2</option>
-            <option [ngValue]="3">3</option>
-            <option [ngValue]="4">4</option>
-            <option [ngValue]="5">5</option>
-            <option [ngValue]="6">6</option>
-            <option [ngValue]="7">7</option>
-            <option [ngValue]="8">8</option>
-            <option [ngValue]="9">9</option>
-            <option [ngValue]="10">10</option>
-            <option [ngValue]="11">11</option>
-            <option [ngValue]="12">12</option>
-            <option [ngValue]="13">13</option>
-            <option [ngValue]="14">14</option>
-            <option [ngValue]="15">15</option>
-            <option [ngValue]="16">16</option>
-            <option [ngValue]="17">17</option>
-            <option [ngValue]="18">18</option>
-            <option [ngValue]="19">19</option>
-            <option [ngValue]="20">20</option>
-         </select>
-         <button (click)="pc.removeClass(i, 1)">-</button>
-      </span>
-   </div>
-   <div>Total Level: {{pc.totalLvl}}</div>
-   <div>
-      <label>Race: </label>
-      <select [(ngModel)]='pc.race'>
-         <option *ngFor="let race of pc.options.races" [ngValue]="race">{{race.name}}</option>
-      </select>
-   </div>
+   <class-display [classes]="pc.classes" [options]="options.classes"></class-display>
+   <race-display [race]="pc.race" [options]="options.races"></race-display>
    <div><!--Derived/Misc. Stats-->
       <div>
          <label>Armor Class: </label>
@@ -69,25 +30,5 @@
       </div>
       <br>
    </div>
-   <div><!--Ability Scores, Modifiers and Saving Throws-->
-      <div *ngFor="let stat of pc.stat; let i = index">
-         <label>{{stat.name}}: </label>
-         <input [(ngModel)]="stat.score">
-         <div>
-            <label>Modifier: </label>
-            <span>{{display(pc.getMod(i))}}</span>
-            <div>
-               <input type="checkbox" [(ngModel)]="stat.saveProf">
-               Saving Throw:
-               <span>{{display(pc.getSave(i, stat.saveProf))}}</span>
-            </div>
-         </div>
-         <div *ngFor="let skill of stat.skill">
-            <input type="checkbox" [(ngModel)]="skill.isProf">
-            <label>{{skill.name}}: </label>
-            <span>{{display(pc.getSkill(i, skill.isProf))}}</span>
-         </div>
-         <br>
-      </div>
-   </div>
+   <ability-display [stats]="pc.stat" [race]="pc.race"></ability-display>
 </div>
