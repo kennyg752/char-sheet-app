@@ -11,6 +11,14 @@ import { Options } from './options';
          <select [(ngModel)]="race">
             <option *ngFor="let option of options" [ngValue]="option">{{option.name}}</option>
          </select>
+         <div>
+            <label>Speed: </label>
+            <span>{{race.speed}} ft.</span>
+         </div>
+         <div>
+            <label>Size: </label>
+            <span>{{race.size}}</span>
+         </div>
       </div>
    `
 })

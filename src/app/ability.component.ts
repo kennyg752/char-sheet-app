@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Ability } from './ability';
 import { Race } from './race';
 
+
+
 @Component({
    selector: 'ability-display',
    template: `
@@ -22,4 +24,5 @@ import { Race } from './race';
 export class AbilityDisplayComponent {
    @Input() stats: Ability[];
    @Input() race: Race;
+
 }

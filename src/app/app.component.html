@@ -1,34 +1,3 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <h1>{{title}}</h1>
-<div>
-   <div>
-      <label>Character Name: </label>
-      <input [(ngModel)]="pc.name">
-   </div>
-   <class-display [classes]="pc.classes" [options]="options.classes"></class-display>
-   <race-display [race]="pc.race" [options]="options.races"></race-display>
-   <div><!--Derived/Misc. Stats-->
-      <div>
-         <label>Armor Class: </label>
-         <span>{{pc.getArmorClass(pc.baseAC)}}</span>
-      </div>
-      <div>
-         <label>Initiative: </label>
-         <span>{{display(pc.getMod(1))}}</span>
-      </div>
-      <div>
-         <label>Proficiency Bonus: </label>
-         <span>+{{pc.profBonus}}</span>
-      </div>
-      <div>
-         <label>Speed: </label>
-         <span>{{pc.race.speed}} ft.</span>
-      </div>
-      <div>
-         <label>Size: </label>
-         <span>{{pc.race.size}}</span>
-      </div>
-      <br>
-   </div>
-   <ability-display [stats]="pc.stat" [race]="pc.race"></ability-display>
-</div>
+<player-display></player-display>

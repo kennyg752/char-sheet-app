@@ -33,7 +33,7 @@ export class ClassDisplayComponent {
    getTotalLvl(): number {
       this.totalLvl = 0;
       for (var i = 0; i < this.classes.length; i++) {
-         this.totalLvl += this.classes[i].lvl;
+         this.totalLvl += this.classes[i].level;
       }
       return this.totalLvl;
    }
