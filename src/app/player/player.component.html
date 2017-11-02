@@ -1,0 +1,25 @@
+<span>Name: </span>
+<input [(ngModel)]="name">
+<p>
+  {{ name }}
+</p>
+<div>
+  <div>
+    <label>Armor Type:</label>
+    <select [(ngModel)]="armorType">
+      <option [ngValue]="none">Unarmored</option>
+      <option [ngValue]="mage">Mage Armor</option>
+      <option [ngValue]="leather">Leather Armor</option>
+      <option [ngValue]="studded-leather">Studded Leather Armor</option>
+      <option [ngValue]="chain-mail">Chain Mail</option>
+    </select>
+  </div>
+  Armor Class: {{ GetAC(0) }}
+</div>
+<div>
+  <ability-display [ability]="ability" *ngFor="let ability of abilities"></ability-display>
+</div>
+<span>{{ abilities[0].score }}</span>
+<class></class>
+<race></race>
+<skill></skill>
