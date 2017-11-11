@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Player } from './player';
 
+import { ARMORS } from './mock-armors';
+
 @Component({
   selector: 'player',
   templateUrl: './player.component.html',
@@ -9,7 +11,7 @@ import { Player } from './player';
 })
 export class PlayerComponent implements OnInit {
 
-  Player pc = new Player();
+  pc: Player = new Player();
 
   constructor() { }
 

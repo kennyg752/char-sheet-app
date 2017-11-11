@@ -1,25 +1,19 @@
 <span>Name: </span>
 <input [(ngModel)]="name">
-<p>
-  {{ name }}
-</p>
 <div>
   <div>
     <label>Armor Type:</label>
-    <select [(ngModel)]="armorType">
-      <option [ngValue]="none">Unarmored</option>
-      <option [ngValue]="mage">Mage Armor</option>
-      <option [ngValue]="leather">Leather Armor</option>
-      <option [ngValue]="studded-leather">Studded Leather Armor</option>
-      <option [ngValue]="chain-mail">Chain Mail</option>
+    <select [(ngModel)]="equippedArmor">
+      <option [ngValue]="armor" *ngFor="let armor of ARMORS">{{ armor.name }}</option>
     </select>
   </div>
-  Armor Class: {{ GetAC(0) }}
+  Armor Class: {{ pc.ac }}
 </div>
 <div>
-  <ability-display [ability]="ability" *ngFor="let ability of abilities"></ability-display>
+  <ability-display [ability]="ability" *ngFor="let ability of pc.abilities"></ability-display>
 </div>
-<span>{{ abilities[0].score }}</span>
-<skill></skill>
+<div>
+  <skill-display [skill]="skill" [player]="pc" *ngFor="let skill of pc.skills"></skill-display>
+</div>
 <class></class>
 <race></race>

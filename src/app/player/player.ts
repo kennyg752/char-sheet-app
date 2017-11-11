@@ -2,7 +2,10 @@ import { Ability } from '../ability/ability';
 import { Race } from '../race/race';
 import { Skill } from '../skill/skill';
 import { Class } from '../class/class';
+import { Armor } from './armor';
+
 import { ARMORS } from './mock-armors';
+import { SKILLS } from './mock-skills';
 
 export class Player {
   name = '';
@@ -18,13 +21,13 @@ export class Player {
     new Ability('Intelligence'),
     new Ability('Wisdom'),
     new Ability('Charisma')
-  ];
+  ]
 
   classes: Class[] = [];
-  skills: Skill[] = [];
+  skills: Skill[] = SKILLS;
   equippedArmor = this.setArmor('Unarmored');
 
-  constructor {
+  constructor() {
     this.ac = this.getAC();
   }
 
@@ -39,8 +42,9 @@ export class Player {
       return this.equippedArmor.baseAC + this.abilities[1].mod;
     }
   }
+  
   setArmor(name: string): Armor {
-    for (armor in ARMORS) {
+    for (let armor of ARMORS) {
       if (armor.name === name) {
         return armor;
       }
