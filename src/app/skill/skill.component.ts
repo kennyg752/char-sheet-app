@@ -17,6 +17,14 @@ export class SkillComponent implements OnInit {
   }
 
   getBonus(mod: number, profBonus: number): number {
-    return this.skill.isProficient ? mod + profBonus : mod;
+    let bonus = mod;
+    if (this.skill.proficiency === 'expert')
+      bonus += 2 * profBonus;
+    else if (this.skill.proficiency === 'proficient')
+      bonus += profBonus;
+    return bonus;
+  }
+  checkScope(value: string) {
+    this.skill.proficiency = value;
   }
 }

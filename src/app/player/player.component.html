@@ -10,10 +10,13 @@
   Armor Class: {{ pc.ac }}
 </div>
 <div>
+  <class-display [appClass]="class" *ngFor="let class of pc.classes"></class-display>
+</div>
+<div>
   <ability-display [ability]="ability" *ngFor="let ability of pc.abilities"></ability-display>
 </div>
 <div>
   <skill-display [skill]="skill" [player]="pc" *ngFor="let skill of pc.skills"></skill-display>
 </div>
-<class></class>
+
 <race></race>

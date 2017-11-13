@@ -1,4 +1,8 @@
-<input type="checkbox" [(ngModel)]="skill.isProficient">
+<select [(ngModel)]="skill.proficiency">
+  <option value='none' selected>None</option>
+  <option value='proficient'>Proficient</option>
+  <option value='expert'>Expert</option>
+</select>
 <label>{{ skill.name }}:</label>
 <span>
   {{ getBonus(player.abilities[skill.type].mod, 2) }}

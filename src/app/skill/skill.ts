@@ -1,8 +1,8 @@
 export class Skill {
   name: string;
-  isProficient: boolean;
+  proficiency: string;
   type: number;
   bonus: number;
 
-  
+
 }

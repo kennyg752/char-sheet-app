@@ -15,4 +15,7 @@ export class AbilityComponent implements OnInit {
   ngOnInit() {
   }
 
+  getMod() {
+    return Math.floor((this.ability.score - 10) / 2);
+  }
 }

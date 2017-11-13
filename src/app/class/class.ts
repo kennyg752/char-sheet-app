@@ -1,4 +1,6 @@
 export class Class {
   name: string;
-  level: 0;
+  main: boolean;
+  level: number;
+  hitDie: number;
 }
