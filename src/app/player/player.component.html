@@ -1,17 +1,13 @@
 <span>Name: </span>
 <input [(ngModel)]="name">
-<div>
-  <div>
-    <label>Armor Type:</label>
-    <select [(ngModel)]="equippedArmor">
-      <option [ngValue]="armor" *ngFor="let armor of ARMORS">{{ armor.name }}</option>
-    </select>
-  </div>
+<!--<div>
+  <armor-display [armors]="pc.armors"></armor-display>
   Armor Class: {{ pc.ac }}
-</div>
-<div>
+</div>-->
+<form>
   <class-display [appClass]="class" *ngFor="let class of pc.classes"></class-display>
-</div>
+</form>
+<p>{{ pc.getTotalLvl() }}</p>
 <div>
   <ability-display [ability]="ability" *ngFor="let ability of pc.abilities"></ability-display>
 </div>

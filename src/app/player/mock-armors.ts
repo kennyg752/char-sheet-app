@@ -1,4 +1,4 @@
-import { Armor } from './armor';
+import { Armor } from '../armor/armor';
 
 export const ARMORS: Armor[] = [
   {

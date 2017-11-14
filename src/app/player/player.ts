@@ -2,7 +2,7 @@ import { Ability } from '../ability/ability';
 import { Race } from '../race/race';
 import { Skill } from '../skill/skill';
 import { Class } from '../class/class';
-import { Armor } from './armor';
+import { Armor } from '../armor/armor';
 
 import { ABILITIES } from './mock-abilities';
 import { ARMORS } from './mock-armors';

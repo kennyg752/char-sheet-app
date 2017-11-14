@@ -8,7 +8,6 @@ import { Class } from './class';
 })
 export class ClassComponent implements OnInit {
   @Input() appClass: Class;
-
   constructor() { }
 
   ngOnInit() {

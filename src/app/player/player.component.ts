@@ -18,4 +18,11 @@ export class PlayerComponent implements OnInit {
   ngOnInit() {
   }
 
+  getTotalLvl(): number {
+    this.pc.totalLvl = 0;
+    for (let _class of this.pc.classes) {
+      this.pc.totalLvl += _class.level;
+    }
+    return this.pc.totalLvl;
+  }
 }

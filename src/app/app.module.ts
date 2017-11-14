@@ -8,6 +8,7 @@ import { AbilityComponent } from './ability/ability.component';
 import { ClassComponent } from './class/class.component';
 import { RaceComponent } from './race/race.component';
 import { SkillComponent } from './skill/skill.component';
+//import { ArmorComponent } from './armor/armor.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SkillComponent } from './skill/skill.component';
     ClassComponent,
     RaceComponent,
     SkillComponent,
+    //ArmorComponent,
   ],
   imports: [
     BrowserModule,
