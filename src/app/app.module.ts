@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
-import { AbilityComponent } from './ability/ability.component';
-import { ClassComponent } from './class/class.component';
-import { RaceComponent } from './race/race.component';
-import { SkillComponent } from './skill/skill.component';
-//import { ArmorComponent } from './armor/armor.component';
+import { AbilityComponent } from './player/ability/ability.component';
+import { ClassComponent } from './player/class/class.component';
+import { RaceComponent } from './player/race/race.component';
+import { SkillComponent } from './player/ability/skill/skill.component';
+import { ArmorComponent } from './player/armor/armor.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +18,7 @@ import { SkillComponent } from './skill/skill.component';
     ClassComponent,
     RaceComponent,
     SkillComponent,
-    //ArmorComponent,
+    ArmorComponent,
   ],
   imports: [
     BrowserModule,

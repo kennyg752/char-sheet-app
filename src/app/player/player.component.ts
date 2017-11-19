@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Player } from './player';
+import { Player } from './player.model';
 
-import { ARMORS } from './mock-armors';
+import { ARMORS } from './armor/mock-armors';
 
 @Component({
   selector: 'player',
@@ -16,13 +16,5 @@ export class PlayerComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
-
-  getTotalLvl(): number {
-    this.pc.totalLvl = 0;
-    for (let _class of this.pc.classes) {
-      this.pc.totalLvl += _class.level;
-    }
-    return this.pc.totalLvl;
   }
 }

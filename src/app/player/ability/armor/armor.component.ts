@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Armor } from './armor';
+import { Armor } from './armor.model';
 
 @Component({
   selector: 'armor-display',
@@ -14,8 +14,5 @@ export class ArmorComponent implements OnInit {
   ngOnInit() {
   }
 
-  setArmor(name: string) {
-    
-  }
 
 }

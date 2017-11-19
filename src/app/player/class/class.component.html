@@ -1,0 +1,16 @@
+<div *ngFor="let class of classes">
+  <button (click)="levelDown(class)" *ngIf="class.level > 0">-</button>
+  <button (click)="levelUp(class)" *ngIf="class.level < 20">+</button>
+  <label>
+    {{ class.name }}:
+    {{ class.level }}
+  </label>
+  <br>
+</div>
+<span>Total Level: {{ totalLvl }}</span>
+<div *ngIf="build.length > 0">
+  <h3>Character Build:</h3>
+  <div *ngFor="let step of build; let i = index">
+    {{ (i + 1) + ": " + step.name }}
+  </div>
+</div>

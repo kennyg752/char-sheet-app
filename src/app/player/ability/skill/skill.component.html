@@ -1,0 +1,11 @@
+<div *ngFor="let skill of skills; let i = index">
+  <label>{{ skill.name }}:</label>
+  <span>
+    {{ getBonus(i) }}
+  </span>
+  <select [(ngModel)]="skill.proficiency">
+    <option value='none' selected>None</option>
+    <option value='proficient'>Proficient</option>
+    <option value='expert'>Expert</option>
+  </select>
+</div>

@@ -1,18 +1,10 @@
-<span>Name: </span>
-<input [(ngModel)]="name">
-<!--<div>
-  <armor-display [armors]="pc.armors"></armor-display>
-  Armor Class: {{ pc.ac }}
-</div>-->
-<form>
-  <class-display [appClass]="class" *ngFor="let class of pc.classes"></class-display>
-</form>
-<p>{{ pc.getTotalLvl() }}</p>
-<div>
-  <ability-display [ability]="ability" *ngFor="let ability of pc.abilities"></ability-display>
-</div>
-<div>
-  <skill-display [skill]="skill" [player]="pc" *ngFor="let skill of pc.skills"></skill-display>
-</div>
+<span>Name: <input [(ngModel)]="pc.name"></span>
 
-<race></race>
+<div>
+  <h3>Abilities: </h3>
+  <ability-display></ability-display>
+</div>
+<div>
+  <h3>Classes: </h3>
+  <class-display></class-display>
+</div>
