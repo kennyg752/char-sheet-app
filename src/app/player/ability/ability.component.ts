@@ -21,6 +21,5 @@ export class AbilityComponent implements OnInit {
   }
   getMod(index: number) {
     this.abilities[index].mod = Math.floor((this.abilities[index].score - 10) / 2);
-    return this.abilities[index].mod;
   }
 }

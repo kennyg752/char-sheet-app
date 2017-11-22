@@ -13,12 +13,20 @@ export class ClassComponent implements OnInit {
   totalLvl: number = 0;
   profBonus: number;
   build: Class[] = [];
-  constructor() { }
+  constructor() {
+    for (let i = 0; i < 20; i++) {
+      this.build.push({
+        name: 'None',
+        level: 0,
+        hitDie: 0,
+      });
+    }
+  }
 
   ngOnInit() {
   }
 
-  levelUp(curClass: Class) {
+  /*levelUp(curClass: Class) {
     if (this.totalLvl < 20) {
       curClass.level++;
       this.build.push(curClass);
@@ -36,5 +44,5 @@ export class ClassComponent implements OnInit {
       }
     }
     this.totalLvl = this.build.length;
-  }
+  }*/
 }

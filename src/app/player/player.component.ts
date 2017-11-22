@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Player } from './player.model';
 
-import { ARMORS } from './armor/mock-armors';
+import { ARMORS } from './ability/armor/mock-armors';
 
 @Component({
   selector: 'player',

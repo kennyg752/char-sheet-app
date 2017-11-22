@@ -1,8 +1,8 @@
 <div *ngFor="let ability of abilities; let i = index">
   <label>{{ ability.name }}:</label>
-  <input type="number" min="0" max="40" [(ngModel)]="ability.score">
+  <input type="number" min="0" max="40" [(ngModel)]="ability.score" (input)="getMod(i)">
   <span>
-    {{ getMod(i) }}
+    {{ ability.mod }}
   </span>
   <br>
   <skill-display [skills]="ability.skills" [mod]="ability.mod"></skill-display>
